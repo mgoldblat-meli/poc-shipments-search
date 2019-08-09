@@ -16,8 +16,7 @@ dependencies{
     testCompile 'junit:junit:4.12'
     compile 'io.jooby:jooby-netty:2.0.3'
     compile 'io.jooby:jooby-jackson:2.0.3'
-    //compile 'io.jooby:jooby-guice:2.0.3'
-    compile 'io.jooby:jooby-spring:2.0.3'
+    compile 'io.jooby:jooby-guice:2.0.3'
 
     /*
     compile 'org.slf4j:slf4j-api:1.7.26'
