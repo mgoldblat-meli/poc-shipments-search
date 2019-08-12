@@ -11,7 +11,7 @@ import static spark.Spark.*;
 
 public class Main {
 
-    private static final Logger logger = LogManager.getLogger(Main.class);
+    //private static final Logger logger = LogManager.getLogger(Main.class);
 
     private final PingController pingController;
 
@@ -25,20 +25,17 @@ public class Main {
     {
         port(port);
 
-        get("/ping", (req, res) ->{
-
-            return this.pingController.ping();
+        get("/search", (req, res) ->{
+            return this.pingController.search(req, res);
         });
     }
 
     public static void main(String[] args) {
 
-            Guice.createInjector(new GuiceModule())
-                    .getInstance(Main.class)
-                    .run(8080);
+        Guice.createInjector(new GuiceModule())
+                .getInstance(Main.class)
+                .run(8080);
 
-
-        logger.info("Listening port 8080");
-
+        //logger.info("Listening port 8080");
     }
 }
