@@ -1,5 +1,7 @@
 package com.mercadolibre;
 
+import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.mercadolibre.controller.PingController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,10 +13,30 @@ public class Main {
 
     private static final Logger logger = LogManager.getLogger(Main.class);
 
-    public static void main(String[] args) {
-        port(8080);
+    private final PingController pingController;
 
-        get("/ping", PingController::ping);
+    @Inject
+    Main(PingController pingController)
+    {
+        this.pingController = pingController;
+    }
+
+    void run(int port)
+    {
+        port(port);
+
+        get("/ping", (req, res) ->{
+
+            return this.pingController.ping();
+        });
+    }
+
+    public static void main(String[] args) {
+
+            Guice.createInjector(new GuiceModule())
+                    .getInstance(Main.class)
+                    .run(8080);
+
 
         logger.info("Listening port 8080");
 
